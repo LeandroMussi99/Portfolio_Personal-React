@@ -1,0 +1,155 @@
+/* === Contención del panel derecho (About) === */
+.about-section{
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;         
+  overflow: hidden;     
+  box-sizing: border-box;
+}
+
+/* Evita que hijos en grid/flex aporten ancho extra */
+.about-section *{ min-width: 0; }
+
+/* Si algún texto se hace larguísimo, que no agrande el contenedor */
+.about-text,
+.timeline-item .content,
+.timeline-item .content p,
+.timeline-item .content .place{
+  overflow-wrap: anywhere;   
+}
+
+/* En el grid de cada item, que la columna de contenido pueda encoger */
+.timeline-item{
+  grid-template-columns: calc(var(--rail-x) * 2) minmax(0, 1fr);
+}
+
+/* El header de la sección también sin rigidez */
+.timeline-header{ min-width: 0; }
+
+.skills-heading{
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 20px;
+  padding-left: 4px;
+}
+
+.skills-wrapper {
+  margin-top: 8px;
+}
+
+
+/* ===== Timeline (About section) ===== */
+.about-section .timeline-block:first-of-type{
+  margin-top: 28px;
+}
+
+.timeline-block{
+  --rail-x: 36px;
+  --head-tail: 22px;
+  --gap: 24px;
+  --icon-top: 2px;
+  --icon-size: 40px;
+  --first-gap: 12px;
+  position: relative;
+}
+
+.timeline{
+  position: relative;
+  margin-top: var(--first-gap);
+}
+
+.timeline-block .icon-box.small{
+  position: absolute;
+  left: calc(var(--rail-x) - (var(--icon-size) / 2));
+  top: var(--icon-top);
+  width: var(--icon-size);
+  height: var(--icon-size);
+  z-index: 10;
+}
+
+.timeline-item:first-child::before {
+  content: "";
+  position: absolute;
+  left: var(--rail-x);
+  top: calc(-1 * (var(--first-gap) + var(--head-tail) * 0.6));
+  height: calc(var(--first-gap) + var(--head-tail));
+  width: 2px;
+  background: #2a384f;
+  border-radius: 2px;
+  z-index: 0;
+}
+
+.timeline-header{
+  margin-left: calc(var(--rail-x) * 2);
+  display: flex;
+  align-items: center;
+  height: var(--icon-size);
+}
+
+.timeline-item{
+  display: grid;
+  grid-template-columns: calc(var(--rail-x) * 2) 1fr;
+  gap: 12px;
+  align-items: start;
+  margin-bottom: var(--gap);
+  position: relative;
+}
+
+.timeline-item .dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg-elev);
+  box-shadow: 0 0 2px rgba(0,0,0,.6);
+  justify-self: center;
+  margin-top: 8px;
+  z-index: 2;
+}
+
+.timeline-item::after{
+  content:"";
+  position:absolute;
+  left: var(--rail-x);
+  top: calc(8px + 10px);
+  height: calc(100% + var(--gap) - 10px);
+  width: 2px;
+  background: #2a384f;
+  z-index: 0;
+  border-radius: 2px;
+}
+.timeline-item:last-child::after{ display:none; }
+
+.timeline-item .content h4{
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+}
+.timeline-item .content .place{
+  display: block;
+  color: #c2c8d0;
+  font-size: 14px;
+  margin: 2px 0 6px;
+}
+.timeline-item .content p{
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px){
+  .timeline-block{ --rail-x: 28px; --gap: 20px; --head-tail: 14px; }
+}

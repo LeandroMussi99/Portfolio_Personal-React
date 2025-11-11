@@ -1,0 +1,194 @@
+/* ===== Variables (opcional) ===== */
+:root {
+  --mint: #2dd4bf;          /* mint */
+  --mint-strong: #14b8a6;   /* mint intenso (focus/hover) */
+}
+
+/* ===== Sección Servicios ===== */
+.service-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+/* ===== Tarjetas contenedor ===== */
+.service-card {
+  background: var(--bg-elev);
+  border: 1px solid #1f2937;            /* borde base para que el hover tenga sentido */
+  border-radius: 16px;
+  padding: 24px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.service-card:hover {
+  border-color: var(--mint);
+  box-shadow: 0 0 12px rgba(45, 212, 191, .35);
+}
+
+/* ===== Títulos / subtítulos ===== */
+.service-title {
+  font-size: clamp(26px, 3vw, 32px);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.service-subtitle {
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 500;
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+/* Texto explicativo centrado */
+.service-muted {
+  color: var(--muted);
+  text-align: center;
+  max-width: 720px;
+  margin: 6px auto 18px;
+}
+
+/* ===== Grid de servicios ===== */
+.service-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  justify-items: center;
+}
+
+.service-item {
+  width: 100%;
+  max-width: 500px;
+  background: var(--bg-elev);
+  border: 1px solid #1f2937;            /* igual que project-card */
+  border-radius: 14px;
+  padding: 18px 20px;
+  text-align: center;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  box-shadow: 0 0 8px rgba(45, 212, 191, .12);  /* glow mint tenue */
+}
+.service-item:hover,
+.service-item:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--mint-strong);             /* mint intenso */
+  box-shadow: 0 0 16px rgba(45, 212, 191, .35);
+  outline: none;
+}
+
+/* ===== Formulario ===== */
+.service-form {
+  margin-top: 12px;
+  display: grid;
+  gap: 12px;
+}
+
+.service-field label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.service-field input,
+.service-field textarea {
+  width: 100%;
+  background: #0f1119;
+  color: var(--text);
+  border: 1px solid #253244;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+.service-field input::placeholder,
+.service-field textarea::placeholder {
+  color: var(--muted);
+  opacity: .9;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.service-field input:focus,
+.service-field textarea:focus {
+  outline: none;
+  border-color: var(--mint-strong);
+  background: rgba(45, 212, 191, .04);
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, .12);
+}
+
+/* ===== Botón pill (apagado → encendido) ===== */
+.service-btn {
+  place-self: center;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  background: transparent;
+  border: 1px solid rgba(45, 212, 191, .22);
+  color: rgba(226, 232, 240, .75); /* gris claro */
+  font-weight: 600; cursor: pointer;
+  transition: transform .2s, box-shadow .2s, background .2s, border-color .2s, color .2s;
+}
+.service-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(45, 212, 191, .10);
+  border-color: rgba(45, 212, 191, .45);
+  color: #eaf6f5;
+  box-shadow: 0 0 10px rgba(45, 212, 191, .18);
+}
+.service-btn:focus-visible {
+  outline: none;
+  background: rgba(45, 212, 191, .14);
+  border-color: var(--mint-strong);
+  color: #f8fafc;
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, .22);
+}
+.service-form:focus-within .service-btn {
+  background: rgba(45, 212, 191, .20);
+  border-color: var(--mint-strong);
+  color: #f8fafc;
+  box-shadow: 0 0 16px rgba(45, 212, 191, .28);
+}
+.service-btn[disabled] {
+  opacity: .65; cursor: default; transform: none; background: transparent; box-shadow: none;
+}
+
+/* ===== Errores de validación ===== */
+.service-field.has-error input,
+.service-field.has-error textarea {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, .15);
+  background: rgba(239, 68, 68, .04);
+}
+.service-error {
+  margin-top: 6px; font-size: 0.85rem; color: #fca5a5;
+}
+.service-field.has-error input:focus,
+.service-field.has-error textarea:focus {
+  border-color: var(--mint-strong);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, .25);
+  background: rgba(20, 184, 166, .03);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .service-card { padding: 18px; }
+  .service-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== Fix autofill (modo oscuro) ===== */
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-elev) inset !important;
+  -webkit-text-fill-color: var(--text) !important;
+  caret-color: var(--text) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus {
+  border-color: var(--mint-strong) !important;
+  box-shadow: 0 0 4px rgba(45, 212, 191, .3) !important;
+}

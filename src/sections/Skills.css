@@ -1,0 +1,112 @@
+/* Contenedor */
+.skills-carousel{
+  position: relative;
+  margin-top: 24px;
+
+  /* 👇 nuevo: evita desbordes y da “aire” para las flechas */
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-inline: 16px;  /* espacio interno para que entren las flechas */
+
+  background: transparent;
+  border: 0;
+  border-radius: 12px;
+  backdrop-filter: saturate(120%) blur(2px);
+  box-shadow: none;
+  outline: none;
+}
+
+/* Viewport + track */
+.slides-viewport{
+  overflow: hidden;
+  border-radius: 0;
+  max-width: 100%;
+}
+.slides-track{
+  display: flex;
+  transition: transform .4s ease;
+  will-change: transform;
+  max-width: 100%;
+}
+
+/* Slide */
+.slide{
+  min-width: 100%;
+  box-sizing: border-box;        /* 👈 evita sumar ancho por padding */
+  padding: 12px 0 14px;
+  background: transparent;
+  border-right: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+.slide:last-child{ border-right: 0; }
+
+.slide-header{
+  display: flex; align-items: center; justify-content: center; /* centrado título */
+  margin-bottom: 12px;
+}
+.skills-title{ margin: 0; font-size: 18px; text-align: center; }
+
+/* Pills centradas */
+.slide-content{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* <— centrado horizontal */
+  gap: 10px;
+  padding-inline: 2px;
+}
+.skill-pill{
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 12px; border-radius: 999px; white-space: nowrap;
+  border: 1px solid #273244; background: #0f141d; color: var(--text);
+  transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+.skill-pill:hover{ transform: translateY(-1px); border-color: var(--accent); }
+.skill-icon{ font-size: 20px; line-height: 0; }
+.slides-track.no-anim { transition: none; }
+
+/* Flechas */
+.slide-arrow{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 34px; height: 34px; border-radius: 10px;
+  display: grid; place-items: center; z-index: 3;
+  border: 1px solid rgba(39,50,68,.7);
+  background: rgba(15,20,29,.9);
+  cursor: pointer; font-size: 20px; line-height: 1;
+  transition: transform .12s ease, background .12s ease, border-color .12s ease, opacity .12s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,.25);
+  opacity: 0; pointer-events: none;
+  color: var(--text);
+}
+.skills-carousel:hover .slide-arrow{ opacity: 1; pointer-events: auto; }
+.slide-arrow.left  { left: 8px; }
+.slide-arrow.right { right: 8px; }
+.slide-arrow:hover{
+  transform: translateY(-50%) scale(1.05);
+  background:#101823; border-color:#2a384f;
+}
+
+/* Dots centrados */
+.dots{
+  display: flex; justify-content: center; gap: 8px;
+  padding: 8px 0 12px;
+  background: transparent;
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
+}
+.dot{
+  width: 7px; height: 7px; border-radius: 999px; background: #2a3547; border: 0;
+  cursor: pointer; transition: transform .12s ease, background .12s ease;
+}
+.dot:hover{ transform: scale(1.15); }
+.dot.active{ background: var(--accent); }
+
+/* Mobile: flechas ocultas siempre */
+@media (max-width: 560px){
+  .slide{ padding: 12px 14px 14px; }
+  .skill-pill{ padding: 8px 10px; }
+  .skill-icon{ font-size: 18px; }
+  .slide-arrow{ display: none; }
+}
