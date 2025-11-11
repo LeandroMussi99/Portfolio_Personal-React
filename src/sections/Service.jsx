@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./service.css";
+import "./Service.css";
 
 const FORM_ENDPOINT = "https://formspree.io/f/meovqger";
 
