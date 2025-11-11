@@ -1,10 +1,12 @@
+import avatar from "../assets/avatar.webp";
+
 export default function Sidebar() {
   return (
     <aside className="sidecard">
 
       {/* Avatar */}
       <div className="avatar-wrap">
-        <img src="/src/assets/avatar.webp" alt="Leandro Mussi" className="avatar-img" />
+        <img src={avatar} alt="Leandro Mussi" className="avatar-img" />
       </div>
 
       {/* Nombre + subtítulo */}
