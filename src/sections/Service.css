@@ -15,7 +15,7 @@
 /* ===== Tarjetas contenedor ===== */
 .service-card {
   background: var(--bg-elev);
-  border: 1px solid #1f2937;            /* borde base para que el hover tenga sentido */
+  border: 1px solid #1f2937;            
   border-radius: 16px;
   padding: 24px;
   transition: border-color .2s ease, box-shadow .2s ease;
@@ -171,6 +171,33 @@
   border-color: var(--mint-strong);
   box-shadow: 0 0 0 3px rgba(20, 184, 166, .25);
   background: rgba(20, 184, 166, .03);
+}
+
+/* ===== Estilos de Alertas (Success/Error) ===== */
+
+.service-alert {
+  /* Estilo base de la alerta */
+  margin-top: 15px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* 🟢 Estilo de Éxito (Success - Clase .ok) */
+.service-alert.ok {
+  background: rgba(45, 212, 191, .15); /* Fondo verde menta suave */
+  border: 1px solid var(--mint-strong);
+  color: var(--mint); /* Texto principal en color menta */
+  box-shadow: 0 0 10px rgba(45, 212, 191, .25);
+}
+
+/* 🔴 Estilo de Error (Fallos de servidor/validación - Clase .error) */
+.service-alert.error {
+  background: rgba(239, 68, 68, .15); /* Fondo rojo suave */
+  border: 1px solid #ef4444;
+  color: #fca5a5; /* Texto principal en color rojo */
 }
 
 /* ===== Responsive ===== */

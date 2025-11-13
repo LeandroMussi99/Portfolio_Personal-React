@@ -31,10 +31,10 @@ export default function App() {
     setActive(id);
   };
 
-  // 1. Definimos qué sidebar usar en el Layout. En móvil, pasamos 'null' o 'undefined'.
+  // Definimos qué sidebar usar en el Layout. En móvil, pasamos 'null' o 'undefined'.
   const sidebarContentForLayout = isMobile ? null : <SidebarDesktop />;
 
-  // 2. Definimos el Layout principal con el Panel
+  // Definimos el Layout principal con el Panel
   const LayoutComponent = (
     <Layout sidebar={sidebarContentForLayout}> 
       <Panel active={active} onChange={handleChange}>
@@ -47,13 +47,12 @@ export default function App() {
 
   return (
     <>
-      {/* 3. RENDERIZACIÓN CONDICIONAL DE LA CARD MÓVIL:
+      {/* RENDERIZACIÓN CONDICIONAL DE LA CARD MÓVIL:
         Si es móvil, renderizamos el SidebarMobile FUERA DEL LAYOUT GRID.
-        Esto le permite tomar el ancho completo y aparecer antes del contenido principal.
       */}
       {isMobile && <SidebarMobile />}
 
-      {/* 4. Renderizamos el Layout (que contendrá el SidebarDesktop en pantallas grandes) */}
+      {/* Renderizamos el Layout (que contendrá el SidebarDesktop en pantallas grandes) */}
       {LayoutComponent}
     </>
   );

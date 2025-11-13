@@ -14,7 +14,7 @@ const useScreenSize = (breakpoint = 768) => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [breakpoint]); // Vuelve a ejecutar si el breakpoint cambia (aunque aquí es estático)
+  }, [breakpoint]); // Vuelve a ejecutar si el breakpoint cambia
 
   return { isMobile, breakpoint };
 };

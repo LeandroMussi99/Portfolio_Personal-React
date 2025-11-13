@@ -43,7 +43,7 @@
 .cert-title{ margin:6px 0 4px; font-size:15px; }
 .cert-meta{ color:var(--muted); margin:0 0 10px; font-size:13px; }
 
-/* Modal (si lo usás en este archivo) */
+/* Modal */
 .preview-backdrop{
   position: fixed; inset:0; background: rgba(0,0,0,.55);
   display:grid; place-items:center; z-index:999; backdrop-filter: blur(2px);

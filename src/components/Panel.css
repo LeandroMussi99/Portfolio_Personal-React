@@ -8,6 +8,7 @@
   box-shadow:0 6px 18px rgba(0,0,0,.25);
   overflow:visible;
   position:relative;
+  margin-top:var(--page-gap);
   margin-bottom:var(--page-gap);
 }
 .panel-header{
@@ -44,5 +45,4 @@
   }
   .tabs-group{justify-content:space-between;width:100%}
   .tab{flex:1 1 auto;text-align:center;padding:10px 8px;border-radius:12px;font-size:13px}
-  /* El body padding para dejar espacio a la nav bar ya está en index.css */
 }

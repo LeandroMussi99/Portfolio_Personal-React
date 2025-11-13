@@ -20,7 +20,7 @@ export default function ProjectCard({
     if (!forceFlip) setFlipped(false);
   }, [forceFlip]);
 
-  // Esc cierra cuando está volteada manualmente (y no está el toggle global)
+  // Esc cierra cuando está volteada manualmente 
   useEffect(() => {
     if (!(image && flipped) || forceFlip) return;
     const onKey = (e) => {

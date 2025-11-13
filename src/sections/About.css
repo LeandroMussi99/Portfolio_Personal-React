@@ -7,10 +7,10 @@
   box-sizing: border-box;
 }
 
-/* Evita que hijos en grid/flex aporten ancho extra */
+
 .about-section *{ min-width: 0; }
 
-/* Si algún texto se hace larguísimo, que no agrande el contenedor */
+/* ===== Texto y habilidades ===== */
 .about-text,
 .timeline-item .content,
 .timeline-item .content p,
@@ -18,12 +18,12 @@
   overflow-wrap: anywhere;   
 }
 
-/* En el grid de cada item, que la columna de contenido pueda encoger */
+
 .timeline-item{
   grid-template-columns: calc(var(--rail-x) * 2) minmax(0, 1fr);
 }
 
-/* El header de la sección también sin rigidez */
+
 .timeline-header{ min-width: 0; }
 
 .skills-heading{

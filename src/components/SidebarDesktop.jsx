@@ -2,7 +2,6 @@
 import avatar from "../assets/avatar.webp";
 import './SidebarDesktop.css';
 
-// NOTA: Si Sidebar necesita props (active, onChange, etc.), agrégalas aquí:
 export default function SidebarDesktop() { 
     return (
         // Clase para el diseño de escritorio (usada en index.css)
@@ -16,7 +15,7 @@ export default function SidebarDesktop() {
 
             <hr className="divider" />
 
-            {/* ========== CONTENIDO COMPLETO (Copado de tu código original) ========== */}
+            {/* ===== Información de contacto ===== */}
             <ul className="info-list">
                 <li className="info-row">
                     <span className="icon-box">
@@ -87,8 +86,7 @@ export default function SidebarDesktop() {
                         <path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.1c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.28-1.7-1.28-1.7-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.76.4-1.26.72-1.55-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 5.82 0c2.22-1.49 3.2-1.18 3.2-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.77 1.07.77 2.16v3.2c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/>
                     </svg>
                 </a>
-            </div>
-            {/* ========================================================================= */}
+            </div> 
         </div>
     );
 }

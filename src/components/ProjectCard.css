@@ -1,6 +1,6 @@
 /* src/components/ProjectCard.css */
 
-/* ===== Project Card (base + flip + glow azul) ===== */
+/* ===== Project Card ===== */
 .project-card{
   position: relative;
   overflow: hidden;
@@ -62,7 +62,7 @@
   padding: 4px;
 }
 
-/* Botones Icono (Específicos para ProjectCard si los usas solo aquí) */
+/* Botones Icono */
 .btn.icon{
   padding: 8px; border-radius: 10px; line-height:0;
   display:inline-grid; place-items:center;

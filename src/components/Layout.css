@@ -29,19 +29,16 @@
 /* Reglas de Layout para Mobile (≤900px) */
 @media (max-width:900px){
   
-  /* Layout principal (1 columna centrada) */
   .layout{
     grid-template-columns:1fr;
     justify-items:center;
     align-items:start;
   }
-  /* Asegura que los hijos del layout (Sidebar y Panel) tomen un ancho razonable */
+
   .layout > *{ 
     width: min(92vw, 820px); 
   }
   
-  /* Ocultar el ASIDE completo en móvil, ya que usamos SidebarMobile fuera de él si es necesario */
-  /* Aunque la renderización condicional ya hace esto, es una buena práctica */
   .layout-aside {
     display: none;
   }

@@ -21,7 +21,7 @@ export default function Panel({ active, onChange, children }) {
         {/* Título principal */}
         <h1 className="title-inline">{TITLES[active]}</h1>
 
-        {/* 🔽 Navbar / Tabs (desktop arriba, mobile abajo por CSS) */}
+        {/* Navbar / Tabs */}
         <nav className="tabs-rail" aria-label="Navegación principal">
           <div className="tabs-group">
             {TABS.map((t) => (

@@ -12,8 +12,6 @@
     width: min(92vw, 820px);
     margin: 24px auto 20px; 
     padding: 0; 
-    
-    /* 🛑 AJUSTE CLAVE 1: Cortar cualquier borde o sombra que se asome. */
     overflow: hidden; 
   }
 
@@ -58,15 +56,12 @@
   .sidecollapsible--mobile[open] > .sidecollapsible-trigger .chevron{transform:rotate(180deg)}
 
 
-  /* Contenido Desplegable (El div después del summary) */
+  /* Contenido Desplegable */
   .sidecard-content--mobile-expanded{
     background: inherit; 
     padding: 14px 18px 18px;
     animation:slideDown .18s ease both;
-    
-    /* 🛑 AJUSTE CLAVE 3: Aplicar el redondeo final a la parte inferior del contenido, 
-       simulando que es la parte baja de la card. */
-    border-radius: 0 0 17px 17px; /* Debe ser 1px menos que el radio del contenedor para evitar conflictos visuales */
+    border-radius: 0 0 17px 17px; 
   }
   
   @keyframes slideDown{

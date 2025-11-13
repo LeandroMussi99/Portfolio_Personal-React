@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import "./Skills.css";
 import { skills } from "../data/skills";
+import useScreenSize from "../hooks/useScreenSize";
 
 const CATEGORIES = [
   { title: "Lenguajes de Programación", items: skills.languages },
@@ -11,6 +12,7 @@ const CATEGORIES = [
 ];
 
 export default function Skills() {
+  const { isMobile } = useScreenSize(900);
   const LEN = CATEGORIES.length;
 
   // Índice visible en el track (con clones). Arrancamos en 1 (primer real).
@@ -30,17 +32,18 @@ export default function Skills() {
 
   // Helpers
   const disableAnimOneTick = (cb) => {
-    isJumpingRef.current = true;   
+    isJumpingRef.current = true;
     setNoAnim(true);
     cb?.();
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         setNoAnim(false);
-        setTimeout(() => { isJumpingRef.current = false; }, 30);
+        setTimeout(() => {
+          isJumpingRef.current = false;
+        }, 30);
       });
     });
   };
-
 
   const go = (dir) => setVisIndex((i) => i + dir);
   const goTo = (i) => setVisIndex(i + 1);
@@ -55,7 +58,7 @@ export default function Skills() {
 
     // 3) Teletransporte controlado
     if (visIndex === 0) {
-      setPaused(true); 
+      setPaused(true);
       disableAnimOneTick(() => setVisIndex(LEN));
       setTimeout(() => setPaused(false), 60);
     } else if (visIndex === LEN + 1) {
@@ -65,19 +68,29 @@ export default function Skills() {
     }
   };
 
-
   // Swipe táctil
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    let startX = 0, dx = 0, touching = false;
+    let startX = 0,
+      dx = 0,
+      touching = false;
 
-    const down = (e) => { touching = true; startX = e.touches[0].clientX; dx = 0; setPaused(true); };
-    const move = (e) => { if (!touching) return; dx = e.touches[0].clientX - startX; };
+    const down = (e) => {
+      touching = true;
+      startX = e.touches[0].clientX;
+      dx = 0;
+      setPaused(true);
+    };
+    const move = (e) => {
+      if (!touching) return;
+      dx = e.touches[0].clientX - startX;
+    };
     const up = () => {
       if (!touching) return;
       touching = false;
-      if (dx > 60) go(-1); else if (dx < -60) go(1);
+      if (dx > 60) go(-1);
+      else if (dx < -60) go(1);
       setPaused(false);
     };
 
@@ -114,23 +127,55 @@ export default function Skills() {
     };
   }, []);
 
+  //Lógica para la barra de progreso manual (SOLO MÓVIL)
+  useEffect(() => {
+    if (!isMobile) return; // Solo ejecutar si es móvil
+
+    // Necesitamos el viewport real. En móvil, el scroll lo hace el .slides-viewport
+    const viewport = containerRef.current?.querySelector(".slides-viewport");
+    const progressBar = containerRef.current?.querySelector(".progress-track");
+
+    if (!viewport || !progressBar) return;
+
+    const updateProgress = () => {
+      const scrollAmount = viewport.scrollLeft;
+      const scrollMax = viewport.scrollWidth - viewport.clientWidth;
+
+      if (scrollMax === 0) return;
+
+      const progressPercentage = (scrollAmount / scrollMax) * 100;
+      progressBar.style.width = `${progressPercentage}%`;
+    };
+
+    viewport.addEventListener("scroll", updateProgress);
+    updateProgress();
+
+    return () => viewport.removeEventListener("scroll", updateProgress);
+  }, [isMobile]); // Re-ejecutar cuando cambia el modo
+
   // Autoplay
   useEffect(() => {
     if (paused || isJumpingRef.current) return;
     const id = setInterval(() => go(1), AUTOPLAY_MS);
     return () => clearInterval(id);
-  }, [paused, visIndex]); 
+  }, [paused, visIndex]);
 
   const onKeyDown = (e) => {
-    if (e.key === "ArrowRight") { setPaused(true); go(1); }
-    if (e.key === "ArrowLeft") { setPaused(true); go(-1); }
+    if (e.key === "ArrowRight") {
+      setPaused(true);
+      go(1);
+    }
+    if (e.key === "ArrowLeft") {
+      setPaused(true);
+      go(-1);
+    }
   };
 
   // Construimos slides con clones
   const slides = [
-    CATEGORIES[LEN - 1],   // clone del último al principio
-    ...CATEGORIES,         // reales
-    CATEGORIES[0],         // clone del primero al final
+    CATEGORIES[LEN - 1], // clone del último al principio
+    ...CATEGORIES, // reales
+    CATEGORIES[0], // clone del primero al final
   ];
 
   return (
@@ -142,8 +187,26 @@ export default function Skills() {
       tabIndex={0}
     >
       {/* Flechas */}
-      <button className="slide-arrow left" aria-label="Anterior" onClick={() => { setPaused(true); go(-1); }}>‹</button>
-      <button className="slide-arrow right" aria-label="Siguiente" onClick={() => { setPaused(true); go(1); }}>›</button>
+      <button
+        className="slide-arrow left"
+        aria-label="Anterior"
+        onClick={() => {
+          setPaused(true);
+          go(-1);
+        }}
+      >
+        ‹
+      </button>
+      <button
+        className="slide-arrow right"
+        aria-label="Siguiente"
+        onClick={() => {
+          setPaused(true);
+          go(1);
+        }}
+      >
+        ›
+      </button>
 
       <div className="slides-viewport">
         <div
@@ -169,29 +232,38 @@ export default function Skills() {
                       boxShadow: `0 0 10px ${s.color}44`, // glow tenue
                       borderColor: `${s.color}55`, // borde suave
                     }}
-                    >
+                  >
                     <i className={`${s.icon} skill-icon`} aria-hidden="true" />
                     <span>{s.name}</span>
                   </div>
-
                 ))}
               </div>
             </article>
           ))}
         </div>
       </div>
-
-      {/* Dots basados en índice real */}
-      <div className="dots">
-        {CATEGORIES.map((_, i) => (
-          <button
-            key={i}
-            className={`dot ${i === realIndex ? "active" : ""}`}
-            aria-label={`Ir a la categoría ${i + 1}`}
-            onClick={() => { setPaused(true); goTo(i); }}
-          />
-        ))}
-      </div>
+      {/* INDICADOR CONDICIONAL */}
+      {isMobile ? (
+        /* BARRA DE PROGRESO (SOLO MÓVIL) */
+        <div className="scroll-progress-bar">
+          <div className="progress-track" />
+        </div>
+      ) : (
+        /* DOTS ORIGINALES (SOLO DESKTOP) */
+        <div className="dots">
+          {CATEGORIES.map((_, i) => (
+            <button
+              key={i}
+              className={`dot ${i === realIndex ? "active" : ""}`}
+              aria-label={`Ir a la categoría ${i + 1}`}
+              onClick={() => {
+                setPaused(true);
+                goTo(i);
+              }}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }
