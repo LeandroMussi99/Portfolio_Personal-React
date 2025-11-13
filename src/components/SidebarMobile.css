@@ -3,16 +3,18 @@
 /* Reglas de Mobile (≤900px) */
 @media (max-width:900px){
   
-  /* Sidebar Mobile (La Card Colapsable) - Diseño general */
+  /* Sidebar Mobile (La Card Colapsable) - Contenedor Principal */
   .sidecollapsible--mobile{
     background:var(--bg-elev); 
     border:1px solid #1f2937;
     box-shadow:0 6px 18px rgba(0,0,0,.25);
-    border-radius:24px; /* Lo ajustamos después a 18px en el trigger */
+    border-radius: 18px; 
     width: min(92vw, 820px);
-    margin: 0 auto 20px; /* Separación debajo */
-    padding: 0; /* Lo gestiona el contenido interno */
-    border-radius: 18px;
+    margin: 24px auto 20px; 
+    padding: 0; 
+    
+    /* 🛑 AJUSTE CLAVE 1: Cortar cualquier borde o sombra que se asome. */
+    overflow: hidden; 
   }
 
   /* Header Compacto (El <summary> visible) */
@@ -22,29 +24,51 @@
     align-items:center;
     justify-content:space-between;
     gap:12px;
-    padding:12px 14px;
-    background:#0f141d; 
-    border:1px solid #243043;
-    border-radius:18px;
+    padding:16px 18px;
+    
+    background: inherit;
+    border: none;
     cursor:pointer;
-    user-select:none;
     min-height: 50px;
   }
-  .sidecollapsible-trigger::-webkit-details-marker{display:none} 
-  .trigger-left{display:flex;align-items:center;gap:10px}
-  .avatar-mini{width:32px;height:32px;border-radius:8px;object-fit:cover;border:1px solid #243043}
-  .name-mini{font-weight:600}
-  .subtitle-mini{color:var(--muted);font-size:12px}
-  .chevron{color:var(--muted);transition:transform .18s}
   
-  /* Rotar chevron al abrir */
+  /* Cuando el colapsable está ABIERTO, el trigger tiene bordes rectos abajo */
+  .sidecollapsible--mobile[open] .sidecollapsible-trigger {
+    border-radius: 18px 18px 0 0; /* Arriba redondeado, ABAJO RECTO */
+    border-bottom: 1px solid #212938; /* Línea divisoria */
+  }
+  /* Cuando el colapsable está CERRADO: */
+  .sidecollapsible--mobile:not([open]) .sidecollapsible-trigger {
+    border-radius: inherit; 
+  }
+
+  /* === ESTILOS DE ELEMENTOS === */
+  .sidecollapsible-trigger::-webkit-details-marker{display:none} 
+  .trigger-left{display:flex;align-items:center;gap:12px}
+  
+  .avatar-mini{
+    width:100px; 
+    height:100px;
+    border-radius:10px;
+    object-fit:cover;
+    border:1px solid #243043}
+  .name-mini{font-weight:600; font-size: 1.25rem;}
+  .subtitle-mini{color:var(--muted);font-size:14px}
+  .chevron{color:var(--muted);transition:transform .18s}
   .sidecollapsible--mobile[open] > .sidecollapsible-trigger .chevron{transform:rotate(180deg)}
+
 
   /* Contenido Desplegable (El div después del summary) */
   .sidecard-content--mobile-expanded{
-    padding: 14px; 
+    background: inherit; 
+    padding: 14px 18px 18px;
     animation:slideDown .18s ease both;
+    
+    /* 🛑 AJUSTE CLAVE 3: Aplicar el redondeo final a la parte inferior del contenido, 
+       simulando que es la parte baja de la card. */
+    border-radius: 0 0 17px 17px; /* Debe ser 1px menos que el radio del contenedor para evitar conflictos visuales */
   }
+  
   @keyframes slideDown{
     from{opacity:0;transform:translateY(-6px)}
     to{opacity:1;transform:translateY(0)}

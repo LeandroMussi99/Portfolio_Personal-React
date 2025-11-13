@@ -21,7 +21,7 @@ export default function SidebarMobile() {
             </summary>
 
             {/* CONTENIDO DESPLEGABLE (SOLO INFO Y SOCIALS) */}
-            <div id="side-content-mobile" className="sidecard sidecard-content--mobile-expanded">
+            <div id="side-content-mobile" className="sidecard-content--mobile-expanded">
 
                 {/* ========== CONTENIDO QUE SÍ QUEREMOS (Info de Contacto) ========== */}
                 <ul className="info-list">
