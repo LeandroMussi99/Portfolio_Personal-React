@@ -1,4 +1,6 @@
 // src/components/Panel.jsx
+import './Panel.css';
+
 export default function Panel({ active, onChange, children }) {
   const TABS = [
     { id: 'about', label: 'Sobre Mi' },

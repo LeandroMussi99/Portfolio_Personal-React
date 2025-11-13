@@ -1,82 +1,16 @@
-/* ===== Grid ===== */
+/* src/sections/Projects.css */
+
+/* ===== Grid (Se queda aquí porque define la sección de proyectos) ===== */
 .grid{
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* La regla genérica de grid-template-columns en index.css (repeat(auto-fit, minmax(280px, 1fr))) 
+     puede ser suficiente, pero si esta es más específica, déjala. */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
   margin-top: 10px;
 }
 
-/* ===== Project Card (base + flip + glow azul) ===== */
-.project-card{
-  position: relative;
-  overflow: hidden;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  min-height: 260px;
-
-  background: var(--bg-elev);
-  border: 1px solid #1f2937;
-  border-radius: 16px;
-  padding: 16px;
-
-  /* Glow azul sutil */
-  box-shadow: 0 0 8px rgba(168,85,247,.15);   
-  transition: transform .2s ease, box-shadow .25s ease, border-color .2s ease;
-}
-.project-card:hover{
-  transform: translateY(-2px);
-  border-color: #4c1d95;               
-  box-shadow: 0 0 16px rgba(59,130,246,.35);
-}
-
-/* Flip */
-.pc-face{
-  position: absolute;
-  inset: 0;
-  padding: 16px;
-  backface-visibility: hidden;
-  transition: transform .45s ease, opacity .2s ease;
-  will-change: transform;
-  display: flex;             
-  flex-direction: column;
-}
-
-.actions{
-  margin-top: auto;           
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-.pc-front{ transform: rotateY(0deg); }
-.pc-back{
-  background: var(--bg-elev);
-  border-top: 1px solid #1f2937;
-  transform: rotateY(180deg);
-  pointer-events: none;
-}
-.project-card.is-flipped .pc-front{ transform: rotateY(180deg); }
-.project-card.is-flipped .pc-back { transform: rotateY(0deg); pointer-events: auto; }
-
-/* Imagen del preview */
-.thumb-large{
-  width: 100%;
-  aspect-ratio: 16/9;
-  object-fit: contain;
-  background: #0f141d;
-  border-radius: 12px;
-  border: 1px solid #243043;
-  padding: 4px;
-}
-
-/* Botones */
-.btn{ cursor: pointer; }
-.btn.icon{
-  padding: 8px; border-radius: 10px; line-height:0;
-  display:inline-grid; place-items:center;
-}
-.btn.icon:hover{ background:#0f141d; border-color:#2a384f; color:var(--accent); }
-
-/* Línea divisoria entre secciones */
+/* Línea divisoria entre secciones (Se queda aquí porque define la sección) */
 .section-divider{
   height:2px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
@@ -85,7 +19,4 @@
   opacity:.7;
 }
 
-/* Accesibilidad */
-@media (prefers-reduced-motion: reduce){
-  .pc-face{ transition: none !important; }
-}
+/* Los estilos .btn, .chip, y la regla @media (prefers-reduced-motion) que eliminamos de aquí ya deberían estar en tu index.css o ProjectCard.css. */

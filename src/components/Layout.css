@@ -1,0 +1,48 @@
+/* Layout.css */
+
+/* Reglas de Layout para Desktop (≥901px) */
+@media (min-width:901px){
+  
+  /* Layout principal (2 columnas) */
+  .layout{
+    max-width:1200px;
+    margin:24px auto;
+    padding:0 20px;
+    display:grid;
+    grid-template-columns:320px minmax(0,1fr);
+    gap:24px;
+  }
+
+  /* Sidebar de Escritorio: Aplicar fijeza a la ASIDE */
+  .layout-aside {
+    position: sticky;
+    top: 16px; 
+    height: fit-content;
+    max-height: calc(100dvh - 32px); 
+    overflow: auto; 
+    scrollbar-gutter: stable; 
+    z-index: 5;
+  }
+}
+
+
+/* Reglas de Layout para Mobile (≤900px) */
+@media (max-width:900px){
+  
+  /* Layout principal (1 columna centrada) */
+  .layout{
+    grid-template-columns:1fr;
+    justify-items:center;
+    align-items:start;
+  }
+  /* Asegura que los hijos del layout (Sidebar y Panel) tomen un ancho razonable */
+  .layout > *{ 
+    width: min(92vw, 820px); 
+  }
+  
+  /* Ocultar el ASIDE completo en móvil, ya que usamos SidebarMobile fuera de él si es necesario */
+  /* Aunque la renderización condicional ya hace esto, es una buena práctica */
+  .layout-aside {
+    display: none;
+  }
+}

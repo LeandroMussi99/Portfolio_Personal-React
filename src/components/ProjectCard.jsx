@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './ProjectCard.css';
 
 export default function ProjectCard({
   title = '',

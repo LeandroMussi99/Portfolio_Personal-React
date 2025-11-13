@@ -1,4 +1,6 @@
 // src/components/Layout.jsx
+import './Layout.css';
+
 export default function Layout({ sidebar, children }) {
   return (
     <div className="layout">

@@ -1,16 +1,24 @@
-import { useEffect, useState } from 'react'
-import './index.css'
-import Layout from './components/Layout.jsx'
-import Sidebar from './components/Sidebar.jsx'
-import Panel from './components/Panel.jsx'
+import { useEffect, useState } from 'react';
+import './index.css';
 
-import About from './sections/About.jsx'
-import Projects from './sections/Projects.jsx'
-import Service from './sections/Service.jsx'
+// Componentes y Hooks
+import Layout from './components/Layout.jsx';
+import SidebarDesktop from './components/SidebarDesktop.jsx';
+import SidebarMobile from './components/SidebarMobile.jsx';
+import useScreenSize from './hooks/useScreenSize.jsx'; 
+import Panel from './components/Panel.jsx';
+
+// Secciones
+import About from './sections/About.jsx';
+import Projects from './sections/Projects.jsx';
+import Service from './sections/Service.jsx';
 
 export default function App() {
   const getInitial = () => (location.hash?.slice(1) || 'about');
   const [active, setActive] = useState(getInitial);
+
+  // Usamos 900px como breakpoint unificado con el CSS.
+  const { isMobile } = useScreenSize(900);
 
   useEffect(() => {
     const onHash = () => setActive(getInitial());
@@ -23,13 +31,30 @@ export default function App() {
     setActive(id);
   };
 
-  return (
-    <Layout sidebar={<Sidebar />}>
+  // 1. Definimos qué sidebar usar en el Layout. En móvil, pasamos 'null' o 'undefined'.
+  const sidebarContentForLayout = isMobile ? null : <SidebarDesktop />;
+
+  // 2. Definimos el Layout principal con el Panel
+  const LayoutComponent = (
+    <Layout sidebar={sidebarContentForLayout}> 
       <Panel active={active} onChange={handleChange}>
         {active === 'about' && (<><About /></>)}
         {active === 'projects' && <Projects />}
-        {active === 'service' && <Service/>}
+        {active === 'service' && <Service />}
       </Panel>
     </Layout>
+  );
+
+  return (
+    <>
+      {/* 3. RENDERIZACIÓN CONDICIONAL DE LA CARD MÓVIL:
+        Si es móvil, renderizamos el SidebarMobile FUERA DEL LAYOUT GRID.
+        Esto le permite tomar el ancho completo y aparecer antes del contenido principal.
+      */}
+      {isMobile && <SidebarMobile />}
+
+      {/* 4. Renderizamos el Layout (que contendrá el SidebarDesktop en pantallas grandes) */}
+      {LayoutComponent}
+    </>
   );
 }

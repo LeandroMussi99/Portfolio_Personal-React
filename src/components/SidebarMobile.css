@@ -1,0 +1,61 @@
+/* SidebarMobile.css */
+
+/* Reglas de Mobile (≤900px) */
+@media (max-width:900px){
+  
+  /* Sidebar Mobile (La Card Colapsable) - Diseño general */
+  .sidecollapsible--mobile{
+    background:var(--bg-elev); 
+    border:1px solid #1f2937;
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
+    border-radius:24px; /* Lo ajustamos después a 18px en el trigger */
+    width: min(92vw, 820px);
+    margin: 0 auto 20px; /* Separación debajo */
+    padding: 0; /* Lo gestiona el contenido interno */
+    border-radius: 18px;
+  }
+
+  /* Header Compacto (El <summary> visible) */
+  .sidecollapsible-trigger{
+    list-style:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:12px 14px;
+    background:#0f141d; 
+    border:1px solid #243043;
+    border-radius:18px;
+    cursor:pointer;
+    user-select:none;
+    min-height: 50px;
+  }
+  .sidecollapsible-trigger::-webkit-details-marker{display:none} 
+  .trigger-left{display:flex;align-items:center;gap:10px}
+  .avatar-mini{width:32px;height:32px;border-radius:8px;object-fit:cover;border:1px solid #243043}
+  .name-mini{font-weight:600}
+  .subtitle-mini{color:var(--muted);font-size:12px}
+  .chevron{color:var(--muted);transition:transform .18s}
+  
+  /* Rotar chevron al abrir */
+  .sidecollapsible--mobile[open] > .sidecollapsible-trigger .chevron{transform:rotate(180deg)}
+
+  /* Contenido Desplegable (El div después del summary) */
+  .sidecard-content--mobile-expanded{
+    padding: 14px; 
+    animation:slideDown .18s ease both;
+  }
+  @keyframes slideDown{
+    from{opacity:0;transform:translateY(-6px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  /* Compactaciones específicas para el contenido desplegado */
+  .sidecard-content--mobile-expanded .divider{margin:12px 0}
+  .sidecard-content--mobile-expanded .info-list{gap:14px}
+  .sidecard-content--mobile-expanded .info-row{grid-template-columns:36px 1fr;gap:8px}
+  .sidecard-content--mobile-expanded .icon-box{width:36px;height:36px;border-radius:10px}
+  .sidecard-content--mobile-expanded .row-label{font-size:11px}
+  .sidecard-content--mobile-expanded .socials{margin-top:10px;gap:8px}
+  .sidecard-content--mobile-expanded .icon-btn{width:40px;height:40px;border-radius:10px}
+}
