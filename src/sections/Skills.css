@@ -169,6 +169,23 @@
   background: var(--accent);
 }
 
+/* Ajustes de tamaño de pills en pantallas intermedias (901px–1020px) */
+@media (min-width: 901px) and (max-width: 1020px) {
+  .slide-content {
+    gap: 8px;
+  }
+
+  .skill-pill {
+    padding: 8px 10px;
+    gap: 6px;
+    font-size: 14px;
+  }
+
+  .skill-icon {
+    font-size: 18px;
+  }
+}
+
 /* ========================================================== */
 /* 2. DISEÑO MÓVIL (SCROLL HORIZONTAL CON SNAPPING) - [<=900px] */
 /* ========================================================== */

@@ -12,7 +12,7 @@ const CATEGORIES = [
 ];
 
 export default function Skills() {
-  const { isMobile } = useScreenSize(900);
+  const { isMobile } = useScreenSize(901); // punto de quiebre móvil
   const LEN = CATEGORIES.length;
 
   // Índice visible en el track (con clones). Arrancamos en 1 (primer real).
