@@ -7,12 +7,22 @@ export default function About() {
     <section id="about" className="about-section">
 
       {/* Texto de presentación */}
-      <p className="about-text">
-        Soy estudiante de la <strong>Licenciatura en Sistemas</strong> en la <strong>Universidad Nacional de Lanús (UNLa)</strong>.
-        Me apasiona el desarrollo de software y disfruto aprender nuevas tecnologías tanto en backend (Java, Spring Boot, C#) como en 
-        frontend (React, Angular, HTML, CSS, JavaScript).
-        Actualmente estoy construyendo proyectos personales y académicos para fortalecer mis conocimientos.
+      <p>
+        Soy <strong>Analista Programador Universitario</strong> y estudiante de la
+        <strong> Licenciatura en Sistemas</strong> en la
+        <strong> Universidad Nacional de Lanús (UNLa)</strong>.
       </p>
+
+      <p>
+        Me apasiona el desarrollo de software y trabajo con tecnologías de backend
+        (Java, Spring Boot, C#) y frontend (React, Angular, HTML, CSS y JavaScript).
+      </p>
+
+      <p>
+        Actualmente desarrollo proyectos personales y académicos, enfocados en
+        aplicar buenas prácticas y seguir creciendo profesionalmente.
+      </p>
+
 
       <div className="section-divider"></div>
 
@@ -103,7 +113,7 @@ export default function About() {
       <div className="skills-wrapper">
         <Skills />
       </div>
-      
+
     </section>
   );
 }
