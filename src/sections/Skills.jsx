@@ -155,10 +155,10 @@ export default function Skills() {
 
   // Autoplay
   useEffect(() => {
-    if (paused || isJumpingRef.current) return;
+    if (paused || isJumpingRef.current || isMobile) return;
     const id = setInterval(() => go(1), AUTOPLAY_MS);
     return () => clearInterval(id);
-  }, [paused, visIndex]);
+  }, [paused, visIndex, isMobile]);
 
   const onKeyDown = (e) => {
     if (e.key === "ArrowRight") {
@@ -172,11 +172,13 @@ export default function Skills() {
   };
 
   // Construimos slides con clones
-  const slides = [
-    CATEGORIES[LEN - 1], // clone del último al principio
-    ...CATEGORIES, // reales
-    CATEGORIES[0], // clone del primero al final
-  ];
+  const slides = isMobile
+    ? CATEGORIES
+    : [
+        CATEGORIES[LEN - 1], // clone del último al principio
+        ...CATEGORIES, // reales
+        CATEGORIES[0], // clone del primero al final
+      ];
 
   return (
     <section
