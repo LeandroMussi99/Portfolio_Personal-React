@@ -3,6 +3,7 @@ import "./Skills.css";
 import { skills } from "../data/skills";
 import useScreenSize from "../hooks/useScreenSize";
 
+
 const CATEGORIES = [
   { title: "Lenguajes de Programación", items: skills.languages },
   { title: "Desarrollo Frontend", items: skills.frontend },
@@ -11,9 +12,19 @@ const CATEGORIES = [
   { title: "Herramientas", items: skills.tools },
 ];
 
+const HIDDEN_SKILLS = new Set(["Node.js", "MongoDB", "C#", "Angular"]);
+
+const CATEGORIES_FILTERED = CATEGORIES
+  .map((cat) => ({
+    ...cat,
+    items: cat.items.filter((s) => !HIDDEN_SKILLS.has(s.name)),
+  }))
+  .filter((cat) => cat.items.length > 0);
+
+
 export default function Skills() {
   const { isMobile } = useScreenSize(901); // punto de quiebre móvil
-  const LEN = CATEGORIES.length;
+  const LEN = CATEGORIES_FILTERED.length;
 
   // Índice visible en el track (con clones). Arrancamos en 1 (primer real).
   const [visIndex, setVisIndex] = useState(1);
@@ -173,12 +184,13 @@ export default function Skills() {
 
   // Construimos slides con clones
   const slides = isMobile
-    ? CATEGORIES
+    ? CATEGORIES_FILTERED
     : [
-        CATEGORIES[LEN - 1], // clone del último al principio
-        ...CATEGORIES, // reales
-        CATEGORIES[0], // clone del primero al final
-      ];
+      CATEGORIES_FILTERED[LEN - 1],
+      ...CATEGORIES_FILTERED,
+      CATEGORIES_FILTERED[0],
+    ];
+
 
   return (
     <section
@@ -253,7 +265,7 @@ export default function Skills() {
       ) : (
         /* DOTS ORIGINALES (SOLO DESKTOP) */
         <div className="dots">
-          {CATEGORIES.map((_, i) => (
+          {CATEGORIES_FILTERED.map((_, i) => (
             <button
               key={i}
               className={`dot ${i === realIndex ? "active" : ""}`}
