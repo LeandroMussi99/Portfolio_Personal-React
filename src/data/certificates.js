@@ -14,5 +14,13 @@ export const certificates = [
     date: 'sep 2025',
     img: '/certs/unla-doodba.webp',
     verifyUrl: null
+  },
+  {
+    id: 'claude-code',
+    title: 'Claude Code in Action',
+    issuer: 'Anthropic',
+    date: 'ago 2026',
+    img: '/certs/claude-code.webp',
+    verifyUrl: null
   }
 ];
